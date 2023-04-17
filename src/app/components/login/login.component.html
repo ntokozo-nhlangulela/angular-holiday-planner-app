@@ -1,0 +1,67 @@
+<h1 *ngIf="!isForgotPassword">Log In</h1>
+<div *ngIf="isLoading">
+    <div class="loading">Loading&#8230;</div>
+    stuff <a href="#">link</a>
+</div>
+<form [formGroup]="form">
+    <div *ngIf="!isForgotPassword">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" name="email" formControlName="email" required [ngClass]="{
+            'is-invalid':
+              (email.touched || email.dirty) &&
+              !email.valid
+              ,
+              'is-valid': email.valid
+          }">
+            <div class="valid-feedback">Valid Email</div>
+            <div class="invalid-feedback">Invalid Email</div>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password" formControlName="password" required [ngClass]="{
+            'is-invalid':
+              (password.touched || password.dirty) &&
+              !password.valid
+              ,
+              'is-valid': password.valid
+          }">
+            <div class="valid-feedback">Valid Password</div>
+            <div class="invalid-feedback">Password should be at least 8 characters long and contain at least one
+                lowercase
+                letter, one uppercase letter, and one digit. It does not allow special characters.</div>
+        </div>
+    </div>
+
+
+    <div class="forgot-password" *ngIf="isForgotPassword">
+        <h1>Forgot Password</h1>
+        <p>Enter valid email and we will send you an email to reset password .</p>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="email" name="email" required [ngClass]="{
+                'is-invalid':
+                  (email.touched || email.dirty) &&
+                  !email.valid
+                  ,
+                  'is-valid': email.valid
+              }">
+            <div class="valid-feedback">Valid Email</div>
+            <div class="invalid-feedback">Invalid Email</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" (click)="forgotPassword()">Reset</button>
+    </div>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-link" (click)="toggle()" *ngIf="!isForgotPassword">Forgot
+            Password?</button>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-link" (click)="toggle()" *ngIf="isForgotPassword">Login</button>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid" *ngIf="!isForgotPassword"
+        (click)="onSubmit()">Submit</button>
+
+</form>

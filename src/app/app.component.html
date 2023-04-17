@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Holiday Planner</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <div class="auth">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="openLoginModal()">Login</a>
+                    </li>
+                    <li class="nav-item" isLoggedIn="true">
+                        <a class="nav-link" (click)="openRegisterModal() ">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="signOut()">Sign Out</a>
+                    </li>
+                </div>
+                <!-- <li class="nav-item">
+                    <a class="nav-link">Hello {{user.email}}</a>
+                </li> -->
+                <!-- <li>
+                    <div *ngIf="user">
+                        Welcome {{ user.displayName }}
+                    </div>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+</div>
+<app-currency></app-currency>
