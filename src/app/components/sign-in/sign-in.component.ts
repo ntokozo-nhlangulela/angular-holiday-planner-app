@@ -16,12 +16,13 @@ export class SignInComponent {
   submitForm(): void {
     const email: string = this.signInForm.get('email')?.value ?? ''
     const password: string = this.signInForm.get('password')?.value ?? ''
+
    if(this.signInForm.valid){
     this.authService.signIn(email, password)
    }
   }
 
-  constructor(private fb: UntypedFormBuilder, private authService: AuthServiceService) {}
+  constructor(private authService: AuthServiceService) {}
 
 
 }
