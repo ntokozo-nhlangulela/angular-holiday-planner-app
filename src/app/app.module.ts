@@ -18,7 +18,8 @@ import  {AuthServiceService} from "./services/auth-service.service";
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore'
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { HomeComponent } from './components/home/home.component'
 
 registerLocaleData(en);
 
@@ -26,7 +27,8 @@ registerLocaleData(en);
   declarations: [
     SignInComponent,
     SignUpComponent,
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
