@@ -1,7 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import {Trip} from "../models/trip";
 import {collection, collectionData, Firestore, getDocs, query, updateDoc, where} from "@angular/fire/firestore";
 import {Itinerary} from "../models/itinenary";
 import {Route, Router} from "@angular/router";

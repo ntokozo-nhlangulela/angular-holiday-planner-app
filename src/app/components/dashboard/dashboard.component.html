@@ -3,10 +3,10 @@
     <div class="mx-auto max-w-2xl lg:mx-0" >
       <h2 class="text-3xl font-bold tracking-tight text-gray-700 font-bold sm:text-4xl">Hello , {{userEmail}}</h2>
       <p class="mt-2 text-lg leading-8 text-gray-600">Welcome to your trips .</p>
-      <button (click)="goCalender()"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+      <button (click)="goCalender()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
         View Calender
       </button>
-      <button (click)="goToAddTrip()"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+      <button (click)="goToAddTrip()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
         Add Trip
       </button>
     </div>
@@ -28,10 +28,10 @@
           <button (click)="goToIt(trip.tripId)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
             View Itenary
           </button>
-          <button (click)="updateTrip(trip.tripId)"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+          <button (click)="updateTrip(trip.tripId)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
             Update Trip
           </button>
-          <button (click)="deleteTrip(trip.id)"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+          <button (click)="deleteTrip(trip.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
             Delete
           </button>
         </div>

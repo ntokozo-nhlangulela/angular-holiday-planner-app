@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +22,6 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { HomeComponent } from './components/home/home.component';
 import { TripComponent } from './components/trip/trip.component'
 import {NzModalModule} from "ng-zorro-antd/modal";
-import firebase from "firebase/compat";
 import {FIREBASE_OPTIONS} from "@angular/fire/compat";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ItinerariesComponent } from './components/itineraries/itineraries.component';

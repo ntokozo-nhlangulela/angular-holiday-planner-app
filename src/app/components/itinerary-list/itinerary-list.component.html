@@ -4,7 +4,7 @@
       <h2 class="text-3xl font-bold tracking-tight text-gray-700 font-bold sm:text-4xl ">{{tripDetails.tripName}}</h2>
       <p class="mt-2 text-lg leading-8 text-gray-600">{{tripDetails.description}}</p>
     </div>
-    <button (click)="goToAddItinerary(tripDetails.tripId)"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+    <button (click)="goToAddItinerary(tripDetails.tripId)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
       Add Itinerary
     </button>
     <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -29,10 +29,10 @@
           <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600"> {{itenary.notes}}</p>
         </div>
         <div class="relative mt-8 flex items-center gap-x-4">
-          <button (click)="updateItinerary(itenary.itineraryId)"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+          <button (click)="updateItinerary(itenary.itineraryId)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
             Update Itinerary
           </button>
-          <button (click)="deleteItinerary(itenary.id)"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+          <button (click)="deleteItinerary(itenary.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
             Delete
           </button>
         </div>
