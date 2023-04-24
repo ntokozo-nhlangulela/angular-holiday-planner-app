@@ -2,18 +2,27 @@
   <nz-form-item>
     <nz-form-control nzErrorTip="Please input your username!">
       <nz-input-group nzPrefixIcon="user">
-        <input type="text" nz-input formControlName="email" placeholder="Username" />
+        <input
+          nz-input
+          formControlName="email"
+          placeholder="Username"
+          type="email"
+        />
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your Password!">
+    <nz-form-control nzErrorTip="Please input your password!">
       <nz-input-group nzPrefixIcon="lock">
-        <input type="password" nz-input formControlName="password" placeholder="Password" />
+        <input
+          nz-input
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+        />
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
-  <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
-  Or
-  <a routerLink="./sign-up" routerLinkActive="active">register now!</a>
+  <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Sign in</button>
+
 </form>

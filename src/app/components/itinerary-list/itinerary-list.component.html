@@ -1,0 +1,50 @@
+<div class="h-24 bg-gradient-to-r from-blue-400 via-purple-300 to-pink-500 bg-white py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl lg:mx-0">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-700 font-bold sm:text-4xl ">{{tripDetails.tripName}}</h2>
+      <p class="mt-2 text-lg leading-8 text-gray-600">{{tripDetails.description}}</p>
+    </div>
+    <button (click)="goToAddItinerary(tripDetails.tripId)"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+      Add Itinerary
+    </button>
+    <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+      <article class="flex max-w-xl flex-col items-start justify-between border-r rounded-b lg:rounded-b-none lg:rounded-r border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400" *ngFor="let itenary of itenaries">
+        <div class="flex items-center gap-x-4 text-xs">
+          <time datetime="2020-03-16" class="text-gray-500">{{itenary.itineraryStartTime}}</time>
+          <a class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">- {{itenary.itineraryEndTime}}</a>
+        </div>
+        <div class="group relative">
+          <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+
+              <span class="absolute inset-0"></span>
+              {{itenary.itineraryName}}
+
+          </h3>
+          <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+
+            <span class="absolute inset-0"></span>R
+            {{itenary.itineraryCost}}
+
+          </h3>
+          <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600"> {{itenary.notes}}</p>
+        </div>
+        <div class="relative mt-8 flex items-center gap-x-4">
+          <button (click)="updateItinerary(itenary.itineraryId)"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+            Update Itinerary
+          </button>
+          <button (click)="deleteItinerary(itenary.id)"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+            Delete
+          </button>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="h-24 bg-gradient-to-r from-blue-400 via-purple-300 to-pink-500 rounded-lg shadow m-4 dark:bg-gray-800">
+    <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="" class="hover:underline">Ntokozo™</a>. All Rights Reserved.
+    </span>
+    </div>
+  </footer>
+</div>
+
+

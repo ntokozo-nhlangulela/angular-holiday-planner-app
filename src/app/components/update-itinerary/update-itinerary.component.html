@@ -1,0 +1,70 @@
+<nz-modal [nzVisible]="true" nzTitle="Update Itinerary"  (nzOnOk)="onSubmit()" (nzOnCancel)="handleCancel()"">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="itenaryName">Itenary Name</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Itenary Name">
+          <input nz-input formControlName="itenaryName" id="itenaryName" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="tag">Tag</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Tag">
+          <input nz-input formControlName="tag" id="tag" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="startTime">StartTime</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Time">
+          <input nz-input formControlName="startTime" id="startTime" type="time" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="endTime">End Time</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Time">
+          <input nz-input formControlName="endTime" id="endTime" type="time"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="cost" >Cost</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Time">
+          <input
+            nz-input
+            type="text"
+            id="cost"
+            formControlName="cost"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="startLocation" >Start Location</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+          <input nz-input type="startLocation" formControlName="startLocation" id="startLocation" />
+          <ng-template #errorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">The input is not valid Location</ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+          nzFor="endLocation"
+          nzErrorTip="The input is not valid Location">
+          <span>End Location</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Location">
+          <input nz-input id="endLocation" formControlName="endLocation" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Notes" >Notes</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input website!">
+          <input nz-input id="Notes" formControlName="Notes" placeholder="Notes" />
+        </nz-form-control>
+      </nz-form-item>
+
+    </form>
+  </ng-container>
+</nz-modal>

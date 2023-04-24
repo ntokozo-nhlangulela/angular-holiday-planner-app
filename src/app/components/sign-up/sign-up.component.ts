@@ -18,6 +18,7 @@ export class SignUpComponent {
     const password: string = this.signUpForm.get('password')?.value ?? ''
     if(this.signUpForm.valid){
       this.authService.signUp(email, password)
+
     }
   }
 
