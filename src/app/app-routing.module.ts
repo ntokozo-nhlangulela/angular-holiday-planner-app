@@ -10,33 +10,27 @@ import {UpdateTripComponent} from "./components/update-trip/update-trip.componen
 import {ItineraryListComponent} from "./components/itinerary-list/itinerary-list.component";
 import {UpdateItineraryComponent} from "./components/update-itinerary/update-itinerary.component";
 import {CalenderComponent} from "./components/calender/calender.component";
+import {AuthGuard} from "./shared/auth-guard";
 
 const routes: Routes = [
-//  { path: 'home', component: HomeComponent },
   {
-
     path: 'home',
     component: HomeComponent,
     children: [
       { path: 'sign-in', component: SignInComponent },
       { path: 'sign-up', component: SignUpComponent },
-
     ],
   },
   { path: '', redirectTo: '/home/sign-in', pathMatch: 'full' }, // redirect to `first-component`
-  //{ path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'trip', component: TripComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'updatetrip/:tripId', component: UpdateTripComponent },
-  { path: 'deletetrip/:tripId', component: DashboardComponent },
-  { path: 'itinenary/:tripId', component: ItinerariesComponent},
-  { path: 'itinenaryList/:tripId', component: ItineraryListComponent},
-  { path: 'updateitinerary/:itineraryId', component: UpdateItineraryComponent},
-  { path: 'calender', component: CalenderComponent},
-
-
+  { path: 'trip', component: TripComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'updatetrip/:tripId', component: UpdateTripComponent , canActivate: [AuthGuard]},
+  { path: 'deletetrip/:tripId', component: DashboardComponent , canActivate: [AuthGuard]},
+  { path: 'itinenary/:tripId', component: ItinerariesComponent, canActivate: [AuthGuard]},
+  { path: 'itinenaryList/:tripId', component: ItineraryListComponent, canActivate: [AuthGuard]},
+  { path: 'updateitinerary/:itineraryId', component: UpdateItineraryComponent, canActivate: [AuthGuard]},
+  { path: 'calender', component: CalenderComponent, canActivate: [AuthGuard]},
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

@@ -13,31 +13,36 @@ import {
 } from "@angular/fire/firestore";
 import {Router} from "@angular/router";
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class TripService {
   fire = inject(Firestore)
   private tripsCollection: AngularFirestoreCollection<Trip>;
-  private trips: Observable<Trip[]>;
+  private trips$: Observable<Trip[]>;
   private tripsDoc!: AngularFirestoreDocument<Trip>;
-
   constructor(private firestore: AngularFirestore, private router: Router) {
-
     this.tripsCollection = firestore.collection('Trips');
-    this.trips = this.tripsCollection.valueChanges({ idField: 'id' });
+    this.trips$ = this.tripsCollection.valueChanges({ idField: 'id' });
   }
-
+  addTrip(data: Trip) {
+    return new Promise<Trip>((resolve, reject) => {
+      this.firestore
+        .collection("Trips")
+        .add(data)
+        .then(res => { }, err => reject(err));
+    }).then(()=>{
+      this.router.navigate(['dashboard'])
+    })
+  }
   getTrips(): Observable<Trip[]> {
-    return this.trips;
+    return this.trips$;
   }
   getTripById(tripId: string): Observable<Trip[]> {
    const tripRef = collection(this.fire, "Trips")
     const tripQuery = query(tripRef, where("tripId", '==' , tripId))
     return collectionData(tripQuery) as Observable<Trip[]>
   }
-
   async updateTrip(tripId: string, data: Trip): Promise<void> {
     const tripsRef = collection(this.fire, 'Trips');
     const tripQuery = query(tripsRef, where('tripId', '==', tripId));
@@ -57,16 +62,5 @@ export class TripService {
   deleteTrip(tripId: string | undefined): Promise<void> {
     this.tripsDoc = this.firestore.collection('Trips').doc(tripId);
     return this.tripsDoc.delete();
-  }
-  addTrip(data: Trip) {
-    return new Promise<Trip>((resolve, reject) => {
-      this.firestore
-        .collection("Trips")
-        .add(data)
-        .then(res => { }, err => reject(err));
-    }).then(()=>{
-      this.router.navigate(['dashboard'])
-    })
-
   }
 }

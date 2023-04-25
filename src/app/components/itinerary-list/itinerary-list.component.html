@@ -8,7 +8,8 @@
       Add Itinerary
     </button>
     <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-      <article class="flex max-w-xl flex-col items-start justify-between border-r rounded-b lg:rounded-b-none lg:rounded-r border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400" *ngFor="let itenary of itenaries">
+      <article class="flex max-w-xl flex-col items-start justify-between border-r rounded-b lg:rounded-b-none lg:rounded-r border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400"
+               *ngFor="let itenary of itenaries$ | async; trackBy: trackById">
         <div class="flex items-center gap-x-4 text-xs">
           <time datetime="2020-03-16" class="text-gray-500">{{itenary.itineraryStartTime}}</time>
           <a class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">- {{itenary.itineraryEndTime}}</a>
@@ -39,12 +40,6 @@
       </article>
     </div>
   </div>
-  <footer class="h-24 bg-gradient-to-r from-blue-400 via-purple-300 to-pink-500 rounded-lg shadow m-4 dark:bg-gray-800">
-    <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="" class="hover:underline">Ntokozo™</a>. All Rights Reserved.
-    </span>
-    </div>
-  </footer>
 </div>
 
 

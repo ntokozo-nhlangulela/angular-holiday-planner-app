@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ItenaryService} from "../../services/itinerary.service";
+import {ItineraryService} from "../../services/itinerary.service";
 import {Trip} from "../../models/trip";
 import {Itinerary} from "../../models/itinenary";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TripService} from "../../services/trip.service";
+import {map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-itinerary-list',
@@ -11,28 +12,22 @@ import {TripService} from "../../services/trip.service";
   styleUrls: ['./itinerary-list.component.scss']
 })
 export class ItineraryListComponent implements OnInit{
-  itenaries:Itinerary[]=[];
+  itenaries$: Observable<Itinerary[]>;
   tripId:string='';
    tripDetails: Trip = {} as Trip ;
-
-  constructor(private iternaryService:ItenaryService, private route: ActivatedRoute,private router: Router, private tripService:TripService) {
+  constructor(private iternaryService:ItineraryService, private route: ActivatedRoute, private router: Router, private tripService:TripService) {
+    this.itenaries$ = this.iternaryService.getItenaries().pipe(map((itenaries)=>itenaries
+      .filter((itinerary)=>itinerary.tripId === this.tripId)))
    }
    ngOnInit() {
      this.tripId = this.route.snapshot.paramMap.get('tripId')??''
-     this.iternaryService.getItenaries().subscribe((x:Itinerary[])=>{
-       console.log(x)
-       let y = x.filter((x)=>x.tripId === this.tripId);
-       this.itenaries=y;
-       console.log(this.itenaries);
-     });
-      this.tripService.getTripById(this.tripId).subscribe((value)=>{
-        this.tripDetails=value[0];
+      this.tripService.getTripById(this.tripId).subscribe((trips)=>{
+        if(trips){
+          this.tripDetails=trips[0];
+        }
       })
    }
   goToAddItinerary(tripId:string){
-    this.router.navigate(['/itinenary', tripId]);
-  }
-  addItinerary(tripId:string){
     this.router.navigate(['/itinenary', tripId]);
   }
   updateItinerary(itineraryId:string |undefined){
@@ -40,9 +35,8 @@ export class ItineraryListComponent implements OnInit{
   }
   deleteItinerary(itineraryId:string|undefined){
     this.iternaryService.deleteItinerary(itineraryId)
-    //  this.router.navigate(['/deletetrip', tripId]);
   }
-
-
-
+  trackById(index: number, itinerary: Itinerary): string | undefined {
+    return itinerary.id;
+  }
 }

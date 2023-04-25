@@ -9,6 +9,6 @@ export interface Itinerary {
   itineraryStartLocation: string
   itineraryEndLocation: string
   notes: string
-  tripId:string;
+  tripId?:string;
   id?:string;
 }

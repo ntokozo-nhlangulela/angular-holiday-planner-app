@@ -5,3 +5,6 @@ export interface User {
   photoURL: string;
   emailVerified: boolean;
 }
+export class user{
+  constructor(public uid: string, public email: string) {}
+}

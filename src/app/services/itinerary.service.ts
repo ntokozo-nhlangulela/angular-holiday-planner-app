@@ -3,40 +3,47 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs';
 import {collection, collectionData, Firestore, getDocs, query, updateDoc, where} from "@angular/fire/firestore";
 import {Itinerary} from "../models/itinenary";
-import {Route, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ItenaryService {
-  private itenariesCollection: AngularFirestoreCollection<Itinerary>;
-  private itenaries: Observable<Itinerary[]>;
-  private itenaryDoc!: AngularFirestoreDocument<Itinerary>;
+export class ItineraryService {
+  private itineraryCollection: AngularFirestoreCollection<Itinerary>;
+  private itineraries$: Observable<Itinerary[]>;
+  private itineraryDoc!: AngularFirestoreDocument<Itinerary>;
   fire = inject(Firestore)
   constructor(private firestore: AngularFirestore, private router: Router) {
-    this.itenariesCollection = firestore.collection('itenary');
-    this.itenaries = this.itenariesCollection.valueChanges({ idField: 'id' });
+    this.itineraryCollection = firestore.collection('itenary');
+    this.itineraries$ = this.itineraryCollection.valueChanges({ idField: 'id' });
   }
-
+  addItinerary(data: Itinerary) {
+    return new Promise<Itinerary>((resolve, reject) => {
+      this.firestore
+        .collection("itenary")
+        .add(data)
+        .then(res => { }, err => reject(err));
+    }).catch(()=>{
+      alert('Unable to add itenary')
+    })
+  }
   getItenaries(): Observable<Itinerary[]> {
-    return this.itenaries;
+    return this.itineraries$;
   }
-
-  getItenaryById(itenaryId: string): Observable<Itinerary[]> {
-    const tripRef = collection(this.fire, "itenary")
-    const tripQuery = query(tripRef, where("itineraryId", '==' , itenaryId))
-    return collectionData(tripQuery) as Observable<Itinerary[]>
+  getItenaryById(itineraryId: string): Observable<Itinerary[]> {
+    const itineraryRef = collection(this.fire, "itenary")
+    const itineraryQuery = query(itineraryRef, where("itineraryId", '==' , itineraryId))
+    return collectionData(itineraryQuery) as Observable<Itinerary[]>
   }
-
-  async updateItenary(itenaryId: string, data: Itinerary): Promise<void> {
-    const tripsRef = collection(this.fire, 'itenary');
-    const tripQuery = query(tripsRef, where('itineraryId', '==', itenaryId));
-    const querySnapshot = await getDocs(tripQuery);
+  async updateItenary(itineraryId: string, data: Itinerary): Promise<void> {
+    const itineraryRef = collection(this.fire, 'itenary');
+    const itineraryQuery = query(itineraryRef, where('itineraryId', '==', itineraryId));
+    const querySnapshot = await getDocs(itineraryQuery);
     if (querySnapshot.empty) {
-      throw new Error(`No iternary found with ID ${itenaryId}`);
+      throw new Error(`No itinerary found with ID ${itineraryId}`);
     }
-    const tripDocRef = querySnapshot.docs[0].ref;
-    await updateDoc(tripDocRef, {
+    const itineraryDocRef = querySnapshot.docs[0].ref;
+    await updateDoc(itineraryDocRef, {
       itineraryName:data.itineraryName,
       itineraryStartTime: data.itineraryStartTime,
       itineraryCost:data.itineraryCost,
@@ -44,25 +51,11 @@ export class ItenaryService {
       itineraryStartLocation:data.itineraryStartLocation,
       itineraryEndLocation: data.itineraryEndLocation,
       notes:data.notes,
-
     });
-
     this.router.navigate(['dashboard'])
   }
-
-  deleteItinerary(ItineraryId: string | undefined): Promise<void> {
-    this.itenaryDoc = this.firestore.collection('itenary').doc(ItineraryId);
-    return this.itenaryDoc.delete();
-  }
-  addItenary(data: Itinerary) {
-    return new Promise<Itinerary>((resolve, reject) => {
-      this.firestore
-        .collection("itenary")
-        .add(data)
-        .then(res => { }, err => reject(err));
-    }).catch(()=>{
-      console.error('Unable to add itenary')
-    })
-
+  deleteItinerary(itineraryId: string | undefined): Promise<void> {
+    this.itineraryDoc = this.firestore.collection('itenary').doc(itineraryId);
+    return this.itineraryDoc.delete();
   }
 }

@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthServiceService} from "../../services/auth-service.service";
+import {AuthService} from "../../services/auth.service";
 import {TripService} from "../../services/trip.service";
 import {Trip} from "../../models/trip";
 import {Router} from "@angular/router";
+import {User} from "../../models/user";
+import {map, Observable} from "rxjs";
+import {TripsState} from "../../store/trip.reducers";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-dashboard',
@@ -10,31 +14,27 @@ import {Router} from "@angular/router";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit{
-
   userId:string="";
   userEmail: string="";
-  userTrips:Trip[]=[];
-  constructor(private authService:AuthServiceService,private tripservice:TripService, private router: Router
+  userTrips$: Observable<Trip[]>;
+  constructor(private authService:AuthService,protected tripStore: Store<TripsState>, private tripService:TripService, private router: Router
   ) {
+
+    this.userTrips$ = this.tripService.getTrips()
+      .pipe(map((trips)=>
+        trips.filter((trip)=>
+          trip.userId===this.userId)))
   }
   ngOnInit() {
-    this.authService.getUserData().subscribe((value)=>{
-      this.userId= value.uid;
-      this.userEmail=value.email
-
+    this.authService.getUserData().subscribe((user: User) =>{
+      this.userId= user.uid;
+      this.userEmail=user.email
     });
-    this.tripservice.getTrips().subscribe((value:Trip[])=>{
-      let filteredArray = value.filter((filtered)=>filtered.userId === this.userId);
-      this.userTrips=filteredArray;
-
-    })
-
-
   }
   goToAddTrip() {
     this.router.navigate(['/trip'])
   }
-  goToIt(tripId:string){
+  goToItineraries(tripId:string){
     this.router.navigate(['/itinenaryList', tripId]);
   }
   goCalender(){
@@ -44,8 +44,10 @@ export class DashboardComponent implements OnInit{
     this.router.navigate(['/updatetrip', tripId]);
   }
   deleteTrip(tripId:string|undefined){
-    this.tripservice.deleteTrip(tripId)
-  this.router.navigate(['/deletetrip', tripId]);
+    this.tripService.deleteTrip(tripId)
+    this.router.navigate(['/deletetrip', tripId]);
   }
-
+  trackById(index: number, trip: Trip): string | undefined {
+    return trip.id;
+  }
 }
