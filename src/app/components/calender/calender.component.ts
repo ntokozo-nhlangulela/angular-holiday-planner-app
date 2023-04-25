@@ -15,7 +15,7 @@ export class CalenderComponent{
     this.authService.getUserData().subscribe((user)=>{
       this.userId= user.uid;
     });
-    this.trips$ = this.tripService.getTrips().pipe(map((trips)=>trips.filter((trip)=>trip.userId===this.userId)))
+    this.trips$ = this.tripService.getItineraries().pipe(map((trips)=>trips.filter((trip)=>trip.userId===this.userId)))
   }
   trackById(index: number, trip: Trip): string | undefined {
     return trip.id;

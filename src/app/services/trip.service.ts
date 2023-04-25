@@ -35,7 +35,7 @@ export class TripService {
       this.router.navigate(['dashboard'])
     })
   }
-  getTrips(): Observable<Trip[]> {
+  getItineraries(): Observable<Trip[]> {
     return this.trips$;
   }
   getTripById(tripId: string): Observable<Trip[]> {

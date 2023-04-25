@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit{
   constructor(private authService:AuthService,protected tripStore: Store<TripsState>, private tripService:TripService, private router: Router
   ) {
 
-    this.userTrips$ = this.tripService.getTrips()
+    this.userTrips$ = this.tripService.getItineraries()
       .pipe(map((trips)=>
         trips.filter((trip)=>
           trip.userId===this.userId)))
