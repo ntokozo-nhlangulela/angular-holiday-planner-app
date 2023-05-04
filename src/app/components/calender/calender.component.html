@@ -1,0 +1,29 @@
+<nav class="h-24 bg-gradient-to-r from-blue-400 via-purple-300 to-pink-500 rounded-lg shadow m-4 dark:bg-gray-800">
+  <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+    <a href="./dashboard" class="flex items-center">
+      <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Holiday Planner" />
+
+      <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Let's Go</span>
+    </a>
+    <div class="flex items-center">
+    </div>
+  </div>
+</nav>
+  <div class="w-4/5 h-full shadow-2xl shadow-secondary rounded-md m-auto">
+  <div class="p-6 ml-auto mr-auto">
+    <nz-calendar>
+      <ul *nzDateCell="let date" class="events">
+        <ng-container [ngSwitch]="date.getDate()">
+          <ng-container *ngFor="let trip of trips$ | async; trackBy: trackById">
+                <ng-container *ngSwitchCase="trip.departure | lowercase | date:'dd'">
+                  <nz-badge [nzStatus]="trip.tripName"
+                            [nzText]="trip.tripName"></nz-badge>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+      </ul>
+    </nz-calendar>
+  </div>
+</div>
+
+

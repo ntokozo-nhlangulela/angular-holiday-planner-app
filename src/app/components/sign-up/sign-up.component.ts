@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { AuthService } from 'src/app/services/auth.service';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-sign-up',
@@ -8,19 +9,24 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
-  signUpForm = new FormGroup({
-    password : new FormControl('', [Validators.required]),
-    email : new FormControl('', [Validators.required])
-  })
-
+  signUpForm: FormGroup;
+  constructor( private authService: AuthService, private fb: FormBuilder) {
+    this.signUpForm = this.fb.group({
+      password: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+    });
+  }
+  get email(): AbstractControl<User, User> {
+    return this.signUpForm.get('email')!;
+  }
+  get password(): AbstractControl<User, User> {
+    return this.signUpForm.get('password')!;
+  }
   submitForm(): void {
-    const email: string = this.signUpForm.get('email')?.value ?? ''
-    const password: string = this.signUpForm.get('password')?.value ?? ''
+      const email: string = this.signUpForm.value.email;
+      const password: string = this.signUpForm.value.password;
     if(this.signUpForm.valid){
       this.authService.signUp(email, password)
     }
   }
-
-  constructor( private authService: AuthServiceService) {}
-
 }

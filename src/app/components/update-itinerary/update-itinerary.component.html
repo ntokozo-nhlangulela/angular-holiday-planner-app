@@ -1,0 +1,72 @@
+<nz-modal [nzVisible]="true" nzTitle="Update Itinerary"  (nzOnOk)="onSubmit()" (nzOnCancel)="handleCancel()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="itineraryName">Itenary Name</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Itinerary Name">
+          <input nz-input formControlName="itineraryName" id="itineraryName" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="tag">Tag</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Tag">
+          <input nz-input formControlName="tag" id="tag" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="startTime">StartTime</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Time">
+          <input nz-input formControlName="startTime" id="startTime" type="time" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="endTime">End Time</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input formControlName="endTime" id="endTime" type="time"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="cost" >Cost</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid cost">
+          <input
+            nz-input
+            type="text"
+            id="cost"
+            formControlName="cost"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="cost" >Currency</nz-form-label>
+          <nz-select >
+            <nz-option *ngFor="let currency of (currencies | async)" [nzValue]="currency.value" [nzLabel]='currency.key'></nz-option>
+          </nz-select>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="startLocation" >Start Location</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" >
+          <input nz-input type="startLocation" formControlName="startLocation" id="startLocation" />
+          <ng-template #errorTpl let-control>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+          nzFor="endLocation" >
+          <span>End Location</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input id="endLocation" formControlName="endLocation" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Notes" >Notes</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input id="notes" formControlName="notes" placeholder="notes" />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>

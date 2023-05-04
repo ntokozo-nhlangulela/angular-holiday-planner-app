@@ -1,0 +1,30 @@
+<nz-modal [nzVisible]="true" nzTitle="Update Trip" (nzOnOk)="onSubmit()" (nzOnCancel)="handleCancel()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="tripName">Trip Name</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid trip name!">
+          <input nz-input formControlName="tripName" id="tripName" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="departure">Departure</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input formControlName="departure" id="departure" type="date" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="returnDate">Return Date</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input formControlName="returnDate" id="returnDate" type="date" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="description">Description</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input formControlName="description" id="description" />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
